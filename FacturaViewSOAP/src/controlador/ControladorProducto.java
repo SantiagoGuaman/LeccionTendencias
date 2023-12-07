@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Producto;
 
@@ -27,7 +29,8 @@ public class ControladorProducto {
     
     public void iniciarControl(){
         cargarLista();
-        vista.getBtnAgregarProd().addActionListener(l -> agregarProducto());
+        vista.getBtnAgregarProd().addActionListener(l -> mostrarFrameProducto());
+        vista.getBtnAgregar().addActionListener(l -> agregarProducto());
     }
     
     private void cargarLista(){
@@ -53,8 +56,25 @@ public class ControladorProducto {
         });
     }
     
-    private void agregarProducto(){
+    private void mostrarFrameProducto(){
+        vista.getFrameAddPr().setSize(435, 375);
+        vista.setLocationRelativeTo(vista);
         vista.getFrameAddPr().setVisible(true);
+    }
+    
+    private void agregarProducto(){
+        String unidad = vista.getTxtUnidad().getText().trim();
+        String stock = vista.getTxtStock().getText();
+        String precio_unitario = vista.getTxtPrecio().getText();
+        //Clasificacion clasi;
+        //Proveedor prov;
+        
+        if(!unidad.isEmpty() || !stock.isEmpty() || !precio_unitario.isEmpty()){
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pueden dejar campos vacios");
+            vista.getFrameAddPr().dispose();
+        }
     }
     
     private void cargarComboClasificacion(){

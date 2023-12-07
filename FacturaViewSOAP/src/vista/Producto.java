@@ -38,14 +38,15 @@ public class Producto extends javax.swing.JFrame {
         txtUnidad = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
-        comboClasificacion = new javax.swing.JComboBox<>();
-        comboProveedor = new javax.swing.JComboBox<>();
+        comboClasificacion = new javax.swing.JComboBox();
+        comboProveedor = new javax.swing.JComboBox();
         rdIva = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProducto = new javax.swing.JTable();
@@ -65,40 +66,51 @@ public class Producto extends javax.swing.JFrame {
 
         jLabel7.setText("Proveedor:");
 
+        btnAgregar.setText("Agregar");
+
         javax.swing.GroupLayout frameAddPrLayout = new javax.swing.GroupLayout(frameAddPr.getContentPane());
         frameAddPr.getContentPane().setLayout(frameAddPrLayout);
         frameAddPrLayout.setHorizontalGroup(
             frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frameAddPrLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
                 .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(frameAddPrLayout.createSequentialGroup()
-                        .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(txtUnidad)
-                            .addComponent(txtStock)
-                            .addComponent(txtPrecio)
-                            .addComponent(comboClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameAddPrLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rdIva)
-                        .addGap(129, 129, 129)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel2))
+                    .addGroup(frameAddPrLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(frameAddPrLayout.createSequentialGroup()
+                                    .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtUnidad)
+                                        .addComponent(txtStock)
+                                        .addComponent(txtPrecio)
+                                        .addComponent(comboClasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(comboProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameAddPrLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rdIva)
+                                    .addGap(129, 129, 129)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frameAddPrLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregar)
+                                .addGap(118, 118, 118)))))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         frameAddPrLayout.setVerticalGroup(
             frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frameAddPrLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(57, 57, 57)
+                .addGap(31, 31, 31)
                 .addGroup(frameAddPrLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -120,7 +132,9 @@ public class Producto extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(rdIva)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(54, 54, 54))
         );
 
         javax.swing.text.PlainDocument doc = (javax.swing.text.PlainDocument) txtStock.getDocument();
@@ -227,19 +241,19 @@ public class Producto extends javax.swing.JFrame {
         this.tblProducto = tblProducto;
     }
 
-    public JComboBox<String> getComboClasificacion() {
+    public JComboBox getComboClasificacion() {
         return comboClasificacion;
     }
 
-    public void setComboClasificacion(JComboBox<String> comboClasificacion) {
+    public void setComboClasificacion(JComboBox comboClasificacion) {
         this.comboClasificacion = comboClasificacion;
     }
 
-    public JComboBox<String> getComboProveedor() {
+    public JComboBox getComboProveedor() {
         return comboProveedor;
     }
 
-    public void setComboProveedor(JComboBox<String> comboProveedor) {
+    public void setComboProveedor(JComboBox comboProveedor) {
         this.comboProveedor = comboProveedor;
     }
 
@@ -282,13 +296,22 @@ public class Producto extends javax.swing.JFrame {
     public void setTxtUnidad(JTextField txtUnidad) {
         this.txtUnidad = txtUnidad;
     }
+
+    public JButton getBtnAgregar() {
+        return btnAgregar;
+    }
+
+    public void setBtnAgregar(JButton btnAgregar) {
+        this.btnAgregar = btnAgregar;
+    }
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarProd;
-    private javax.swing.JComboBox<String> comboClasificacion;
-    private javax.swing.JComboBox<String> comboProveedor;
+    private javax.swing.JComboBox comboClasificacion;
+    private javax.swing.JComboBox comboProveedor;
     private javax.swing.JFrame frameAddPr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

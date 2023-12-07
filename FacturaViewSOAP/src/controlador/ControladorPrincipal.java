@@ -33,8 +33,8 @@ public class ControladorPrincipal {
         String user = loginVista.getTxtUsuario().getText().trim();
         String clave = loginVista.getTxtClave().getText().trim();
 
-        if(1 > 2){
-            JOptionPane.showMessageDialog(null, "Inicio de sesión correcot");
+        if(3 > 2){
+            JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
             Producto vistaP = new Producto();
             ControladorProducto control = new ControladorProducto(vistaP);
             control.iniciarControl();
