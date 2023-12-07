@@ -21,7 +21,7 @@ import modelo.RolCompetencia;
 import modelo.TipoPago;
 import modelo.Usuario;
 import modelo.UsuarioRol;
-import security.AES_ENCRYPTOR;
+//import security.AES_ENCRYPTOR;
 
 /**
  *
@@ -30,8 +30,7 @@ import security.AES_ENCRYPTOR;
 @WebService(serviceName = "PuntoVentaOperaciones")
 public class PuntoVentaOperaciones {
 
-    AES_ENCRYPTOR ac = new AES_ENCRYPTOR();
-
+    //AES_ENCRYPTOR ac = new AES_ENCRYPTOR();
     List<Persona> listaPersonas = new ArrayList<>();
     List<Usuario> listaUsuarios = new ArrayList<>();
     List<Rol> listaRoles = new ArrayList<>();
@@ -60,15 +59,19 @@ public class PuntoVentaOperaciones {
     }
 
     @WebMethod(operationName = "registrarProducto")
-    public boolean registrarPersona(@WebParam(name = "producto") Producto producto,
+    public boolean registrarProducto(@WebParam(name = "producto") Producto producto,
             @WebParam(name = "proveedor") Proveedor proveedor, @WebParam(name = "clasificacion") Clasificacion clasificacion) {
 
-        producto.setClasificacion(clasificacion);
-        producto.setProveedor(proveedor);
-        listaClasificaciones.add(clasificacion);
-        listaProveedores.add(proveedor);
+        try {
+            producto.setClasificacion(clasificacion);
+            producto.setProveedor(proveedor);
+            listaClasificaciones.add(clasificacion);
+            listaProveedores.add(proveedor);
 
-        return listaProductos.add(producto);
+            return listaProductos.add(producto);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @WebMethod(operationName = "registrarCompra")
@@ -82,9 +85,8 @@ public class PuntoVentaOperaciones {
         itemFac.setProducto(producto);
 
         listaFacturas.add(factura);
-        listaItemFacturas.add(itemFac);
 
-        return listaFacturas.add(factura) && listaItemFacturas.add(itemFac);
+        return listaItemFacturas.add(itemFac);
     }
 
     @WebMethod(operationName = "getListaProveedores")
@@ -165,6 +167,7 @@ public class PuntoVentaOperaciones {
                 -> compe.getNombreCompetencia().equals(competenciaNombre));
     }
 
+    /*
     @WebMethod(operationName = "encrypt")
     public String encrypt(@WebParam(name = "data") String data) {
         return ac.encrypt(data);
@@ -174,4 +177,5 @@ public class PuntoVentaOperaciones {
     public String decrypt(@WebParam(name = "encryptData") String encryptData) {
         return ac.decrypt(encryptData);
     }
+     */
 }
