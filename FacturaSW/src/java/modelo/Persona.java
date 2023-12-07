@@ -81,4 +81,8 @@ public class Persona {
     public String toString() {
         return "Persona{" + "id_persona=" + id_persona + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", celular=" + celular + ", correo=" + correo + '}';
     }
+
+    //public abstract Persona buscarPorDNI(String param);
+
+    //public abstract String nombreCompl(String param);
 }

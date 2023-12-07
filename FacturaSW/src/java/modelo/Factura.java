@@ -23,6 +23,10 @@ public class Factura {
     public Factura() {
     }
 
+    public Factura(Persona persona) {
+        this.persona = persona;
+    }
+
     public Factura(int id_factura, String ruc, Persona persona, LocalDateTime fecha, TipoPago tipoPago, Double descuento, Double total) {
         this.id_factura = id_factura;
         this.ruc = ruc;

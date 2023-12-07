@@ -83,4 +83,6 @@ public class Usuario {
         return "Usuario{" + "id_usuario=" + id_usuario + ", persona=" + persona + ", user=" + user + ", password=" + password + '}';
     }
 
+    //public abstract boolean siExiste(String us, String pass);
+    
 }

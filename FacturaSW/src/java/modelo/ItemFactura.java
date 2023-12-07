@@ -20,6 +20,11 @@ public class ItemFactura {
     public ItemFactura() {
     }
 
+    public ItemFactura(Factura factura, Producto producto) {
+        this.factura = factura;
+        this.producto = producto;
+    }
+
     public ItemFactura(int id_item_factura, Factura factura, Producto producto, int cantidad, Double precio, Double subtotal) {
         this.id_item_factura = id_item_factura;
         this.factura = factura;
