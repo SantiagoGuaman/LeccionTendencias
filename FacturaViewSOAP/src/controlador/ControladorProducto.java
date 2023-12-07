@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Producto;
+import ws.Clasificacion;
 import ws.PuntoVentaOperaciones;
 import ws.PuntoVentaOperaciones_Service;
 
@@ -84,7 +85,13 @@ public class ControladorProducto {
     }
     
     private void cargarComboClasificacion(){
+        List<Clasificacion> lis = servicios.getListaClasificaciones();
         
+        vista.getComboClasificacion().removeAllItems();
+        
+        lis.stream().forEach(cl -> {
+            System.out.println("asd");
+        });
     }
     
     private void cargarComboProveedor(){
