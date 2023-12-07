@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Producto;
+import ws.PuntoVentaOperaciones;
+import ws.PuntoVentaOperaciones_Service;
 
 /**
  *
@@ -20,8 +22,12 @@ import vista.Producto;
  */
 public class ControladorProducto {
     private Producto vista;
+    private PuntoVentaOperaciones_Service servicio; 
+    private PuntoVentaOperaciones servicios;
 
     public ControladorProducto(Producto vista) {
+        servicio = new PuntoVentaOperaciones_Service();
+        servicios = servicio.getPuntoVentaOperacionesPort();
         this.vista = vista;
         vista.setVisible(true);
         vista.setLocationRelativeTo(null);
