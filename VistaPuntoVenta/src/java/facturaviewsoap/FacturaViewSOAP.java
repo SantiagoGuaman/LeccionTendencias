@@ -29,9 +29,6 @@ public class FacturaViewSOAP {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatMacDarkLaf());
-            Compra compra = new Compra();
-            ControladorCompra cc = new ControladorCompra(compra);
-            cc.iniciarControl();
             Login login = new Login();
             ControladorPrincipal control = new ControladorPrincipal(login);
             control.iniciarControl();

@@ -6,6 +6,7 @@ package controlador;
 
 import javax.swing.JOptionPane;
 import vista.Login;
+import vista.PanelControl;
 import vista.Producto;
 import vista.Registro;
 import ws.PuntoVentaOperaciones_Service;
@@ -40,8 +41,8 @@ public class ControladorPrincipal {
         System.out.println(clave);
         if (servicios.siExisteUsuario(user, servicios.encrypt(new String(clave)))) {
             JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-            Producto vistaP = new Producto();
-            ControladorProducto control = new ControladorProducto(vistaP);
+            PanelControl vistaP = new PanelControl();
+            ControladorPanel control = new ControladorPanel(vistaP);
             control.iniciarControl();
             this.loginVista.dispose();
 
