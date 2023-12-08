@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.3 (RELEASE-2.4.3-ad3323c; 2019-01-21T17:46:06+0000) JAXWS-RI/2.3.2 JAXWS-API/2.3.2 JAXB-RI/2.3.2 JAXB-API/2.3.2 git-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
+
+<xs:element name="buscarNombreCompleto" type="tns:buscarNombreCompleto"/>
+
+<xs:element name="buscarNombreCompletoResponse" type="tns:buscarNombreCompletoResponse"/>
+
+<xs:element name="buscarPorDNI" type="tns:buscarPorDNI"/>
+
+<xs:element name="buscarPorDNIResponse" type="tns:buscarPorDNIResponse"/>
+
+<xs:element name="decrypt" type="tns:decrypt"/>
+
+<xs:element name="decryptResponse" type="tns:decryptResponse"/>
+
+<xs:element name="encrypt" type="tns:encrypt"/>
+
+<xs:element name="encryptResponse" type="tns:encryptResponse"/>
+
+<xs:element name="estadoRol" type="tns:estadoRol"/>
+
+<xs:element name="estadoRolResponse" type="tns:estadoRolResponse"/>
+
+<xs:element name="getListaClasificaciones" type="tns:getListaClasificaciones"/>
+
+<xs:element name="getListaClasificacionesResponse" type="tns:getListaClasificacionesResponse"/>
+
+<xs:element name="getListaProductos" type="tns:getListaProductos"/>
+
+<xs:element name="getListaProductosResponse" type="tns:getListaProductosResponse"/>
+
+<xs:element name="getListaProveedores" type="tns:getListaProveedores"/>
+
+<xs:element name="getListaProveedoresResponse" type="tns:getListaProveedoresResponse"/>
+
+<xs:element name="loadData" type="tns:loadData"/>
+
+<xs:element name="loadDataResponse" type="tns:loadDataResponse"/>
+
+<xs:element name="registrarCompra" type="tns:registrarCompra"/>
+
+<xs:element name="registrarCompraResponse" type="tns:registrarCompraResponse"/>
+
+<xs:element name="registrarPersona" type="tns:registrarPersona"/>
+
+<xs:element name="registrarPersonaResponse" type="tns:registrarPersonaResponse"/>
+
+<xs:element name="registrarProducto" type="tns:registrarProducto"/>
+
+<xs:element name="registrarProductoResponse" type="tns:registrarProductoResponse"/>
+
+<xs:element name="siExisteCompetencia" type="tns:siExisteCompetencia"/>
+
+<xs:element name="siExisteCompetenciaResponse" type="tns:siExisteCompetenciaResponse"/>
+
+<xs:element name="siExisteRol" type="tns:siExisteRol"/>
+
+<xs:element name="siExisteRolResponse" type="tns:siExisteRolResponse"/>
+
+<xs:element name="siExisteUsuario" type="tns:siExisteUsuario"/>
+
+<xs:element name="siExisteUsuarioResponse" type="tns:siExisteUsuarioResponse"/>
+
+<xs:complexType name="estadoRol">
+<xs:sequence>
+<xs:element name="rolNombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="estadoRolResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="decrypt">
+<xs:sequence>
+<xs:element name="encryptData" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="decryptResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListaClasificaciones">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaClasificacionesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:clasificacion" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="clasificacion">
+<xs:sequence>
+<xs:element name="grupo" type="xs:string" minOccurs="0"/>
+<xs:element name="id_competencia" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarProducto">
+<xs:sequence>
+<xs:element name="producto" type="tns:producto" minOccurs="0"/>
+<xs:element name="proveedor" type="tns:proveedor" minOccurs="0"/>
+<xs:element name="clasificacion" type="tns:clasificacion" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="producto">
+<xs:sequence>
+<xs:element name="clasificacion" type="tns:clasificacion" minOccurs="0"/>
+<xs:element name="id_producto" type="xs:int"/>
+<xs:element name="iva" type="xs:boolean"/>
+<xs:element name="precioUnitario" type="xs:double" minOccurs="0"/>
+<xs:element name="proveedor" type="tns:proveedor" minOccurs="0"/>
+<xs:element name="stock" type="xs:int"/>
+<xs:element name="unidad" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="proveedor">
+<xs:sequence>
+<xs:element name="correo" type="xs:string" minOccurs="0"/>
+<xs:element name="id_proveedor" type="xs:int"/>
+<xs:element name="moneda" type="xs:string" minOccurs="0"/>
+<xs:element name="pais" type="xs:string" minOccurs="0"/>
+<xs:element name="ruc" type="xs:string" minOccurs="0"/>
+<xs:element name="telefono" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarProductoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteUsuario">
+<xs:sequence>
+<xs:element name="user" type="xs:string" minOccurs="0"/>
+<xs:element name="encryptedPassword" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="encrypt">
+<xs:sequence>
+<xs:element name="data" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="encryptResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteRol">
+<xs:sequence>
+<xs:element name="rolNombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteRolResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteCompetencia">
+<xs:sequence>
+<xs:element name="competenciaNombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="siExisteCompetenciaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListaProductos">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaProductosResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:producto" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarNombreCompleto">
+<xs:sequence>
+<xs:element name="dni" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarNombreCompletoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadData">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="loadDataResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="registrarCompra">
+<xs:sequence>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="producto" type="tns:producto" minOccurs="0"/>
+<xs:element name="factura" type="tns:factura" minOccurs="0"/>
+<xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"/>
+<xs:element name="itemFac" type="tns:itemFactura" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="persona">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="celular" type="xs:string" minOccurs="0"/>
+<xs:element name="correo" type="xs:string" minOccurs="0"/>
+<xs:element name="dni" type="xs:string" minOccurs="0"/>
+<xs:element name="id_persona" type="xs:int"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="factura">
+<xs:sequence>
+<xs:element name="descuento" type="xs:double" minOccurs="0"/>
+<xs:element name="fecha" type="tns:localDateTime" minOccurs="0"/>
+<xs:element name="id_factura" type="xs:int"/>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="ruc" type="xs:string" minOccurs="0"/>
+<xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"/>
+<xs:element name="total" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="localDateTime" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="tipoPago">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="id_tipo_pago" type="xs:int"/>
+<xs:element name="tipo" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemFactura">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int"/>
+<xs:element name="factura" type="tns:factura" minOccurs="0"/>
+<xs:element name="id_item_factura" type="xs:int"/>
+<xs:element name="precio" type="xs:double" minOccurs="0"/>
+<xs:element name="producto" type="tns:producto" minOccurs="0"/>
+<xs:element name="subtotal" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarCompraResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarPorDNI">
+<xs:sequence>
+<xs:element name="dni" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarPorDNIResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:persona" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListaProveedores">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaProveedoresResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:proveedor" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarPersona">
+<xs:sequence>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+<xs:element name="competencia" type="tns:competencia" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="id_usuario" type="xs:int"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="user" type="xs:string" minOccurs="0"/>
+<xs:element name="usuarioRol" type="tns:usuarioRol" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuarioRol">
+<xs:sequence>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rol">
+<xs:sequence>
+<xs:element name="estado" type="xs:boolean"/>
+<xs:element name="id_rol" type="xs:int"/>
+<xs:element name="nombreRol" type="xs:string" minOccurs="0"/>
+<xs:element name="usuarioRol" type="tns:usuarioRol" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="competencia">
+<xs:sequence>
+<xs:element name="descripcionComptencia" type="xs:string" minOccurs="0"/>
+<xs:element name="id_competencia" type="xs:int"/>
+<xs:element name="nombreCompetencia" type="xs:string" minOccurs="0"/>
+<xs:element name="rolCompetencia" type="tns:rolCompetencia" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rolCompetencia">
+<xs:sequence>
+<xs:element name="competencia" type="tns:competencia" minOccurs="0"/>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarPersonaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
