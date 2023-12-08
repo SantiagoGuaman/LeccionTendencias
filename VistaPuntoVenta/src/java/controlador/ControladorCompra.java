@@ -6,6 +6,9 @@ package controlador;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -45,6 +48,14 @@ public class ControladorCompra {
         cargarComboProducto();
         cargarComboTipoPago();
         vistaCompra.getBtnCompra().addActionListener(l -> registrarCompra());
+        vistaCompra.getComboProducto().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    llenarTablaDetalle();
+                }
+            }
+        });
     }
 
     /*
@@ -77,56 +88,42 @@ public class ControladorCompra {
         });
     }
      */
-    
     private void llenarFactura() {
         List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
         DefaultTableModel dt;
         dt = (DefaultTableModel) vistaCompra.getTableFactura().getModel();
         dt.setRowCount(0);
-        
+        listaItems.get(vistaCompra.getComboProducto().getSelectedIndex());
+
         listaItems.stream().forEach(item -> {
             String[] fila = {
                 item.getProducto().getUnidad()
             };
             dt.addRow(fila);
         });
-        
     }
-    
+
+    private void llenarTablaDetalle() {
+        List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
+        DefaultTableModel dt = (DefaultTableModel) vistaCompra.getTableProductosLista().getModel();
+        dt.setRowCount(0);
+
+        int selectedIndex = vistaCompra.getComboProducto().getSelectedIndex();
+        if (selectedIndex >= 0 && selectedIndex < listaItems.size()) {
+            ItemFactura selectedItem = listaItems.get(selectedIndex);
+            String[] fila = {
+                selectedItem.getProducto().getUnidad()
+            };
+            dt.addRow(fila);
+        }
+    }
+
     private void mostrarFrameFactura() {
         vistaCompra.getFrameFactura().setSize(435, 375);
         vistaCompra.setLocationRelativeTo(vistaCompra);
         vistaCompra.getFrameFactura().setVisible(true);
     }
 
-    /*
-     private void agregarProducto() {
-        String unidad = vista.getTxtUnidad().getText().trim();
-        String stock = vista.getTxtStock().getText();
-        String precio_unitario = vista.getTxtPrecio().getText();
-        Clasificacion clasi = (Clasificacion) vista.getComboClasificacion().getSelectedItem();
-        Proveedor prov = (Proveedor) vista.getComboProveedor().getSelectedItem();
-        boolean iva = vista.getRdIva().isSelected();
-
-        ws.Producto producto = new ws.Producto();
-        producto.setIva(iva);
-        producto.setStock(Integer.valueOf(stock));
-        producto.setPrecioUnitario(Double.valueOf(precio_unitario));
-        producto.setUnidad(unidad);
-
-        if (!unidad.isEmpty() || !stock.isEmpty() || !precio_unitario.isEmpty()) {
-            if (servicios.registrarProducto(producto, prov, clasi)) {
-                JOptionPane.showMessageDialog(null, "Registro Exitoso");
-                cargarLista();
-                vista.getFrameAddPr().dispose();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se pueden dejar campos vacios");
-            vista.getFrameAddPr().dispose();
-        }
-    }
-    
-     */
     private void registrarCompra() {
         TipoPago tipoPago = (TipoPago) vistaCompra.getComboTipoPago().getSelectedItem();
         Producto producto = (Producto) vistaCompra.getComboProducto().getSelectedItem();
@@ -136,11 +133,26 @@ public class ControladorCompra {
         factura.setPersona(cliente);
         factura.setTipoPago(tipoPago);
         factura.setRuc("0123");
-        
+
         ItemFactura itemFactura = new ItemFactura();
         itemFactura.setFactura(factura);
         itemFactura.setProducto(producto);
-
+        /*
+        List<Producto> listaItems = new ArrayList<>();
+        listaItems.add(producto);
+        DefaultTableModel dt;
+        dt = (DefaultTableModel) vistaCompra.getTableProductosLista().getModel();
+        dt.setRowCount(0);
+        
+        listaItems.stream().forEach(pro -> {
+            String[] fila = {
+                pro.getUnidad(),
+                String.valueOf(pro.getPrecioUnitario())
+                //pro.get
+            };
+            dt.addRow(fila);
+        });  
+         */
         if (servicios.registrarCompra(cliente, producto, factura, tipoPago, itemFactura)) {
             JOptionPane.showMessageDialog(vistaCompra, "Factura generada ahora");
             mostrarFrameFactura();
