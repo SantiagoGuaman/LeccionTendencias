@@ -218,12 +218,21 @@ public class PuntoVentaOperaciones {
         listaProveedores.add(prov_2);
         listaProveedores.add(prov_3);
 
-        Clasificacion class_1 = new Clasificacion(1, "Fruta");
+        Clasificacion class_1 = new Clasificacion(1, "Comida");
         Clasificacion class_2 = new Clasificacion(1, "Coche");
         Clasificacion class_3 = new Clasificacion(1, "Tejidos");
         listaClasificaciones.add(class_1);
         listaClasificaciones.add(class_2);
         listaClasificaciones.add(class_3);
+        
+        TipoPago pago = new TipoPago(1, "Efectivo", "Pago con dinero en caja");
+        listaTipoPagos.add(pago);
+        
+        Producto producto = new Producto(1, 2, 30.00, "Galleta", class_1, prov, true);
+        listaProductos.add(producto);
+        
+        Persona cliente = new Persona(1, "Stacy", "Hanz", "0105449649", "None", "Stacy@gmail.com");
+        listaPersonas.add(cliente);
     }
 
     public static void main(String[] args) {

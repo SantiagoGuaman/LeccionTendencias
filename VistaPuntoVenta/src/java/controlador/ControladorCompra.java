@@ -85,11 +85,11 @@ public class ControladorCompra {
     private void cargarComboTipoPago() {
         vistaCompra.getComboTipoPago().removeAllItems();
 
-        //List<TipoPago> lis = servicios.getListaClasificaciones();
-/*
-        lis.stream().forEach(cl -> {
-            vistaCompra.getComboTipoPago().addItem(new TipoPago(cl.getGrupo(), cl.getIdCompetencia()));
-        });*/
+        List<TipoPago> lis = servicios.getListaTipoPago();
+
+        lis.stream().forEach(ob -> {
+            vistaCompra.getComboTipoPago().addItem(new TipoPago(ob.getTipo()));
+        });
     }
 
     private void cargarComboProducto() {
@@ -97,19 +97,19 @@ public class ControladorCompra {
 
         List<Producto> lis = servicios.getListaProductos();
 
-        lis.stream().forEach(pr -> {
-            //vistaCompra.getComboProducto().addItem(new Pro(pr.getIdProveedor(), pr.getRuc()));
+        lis.stream().forEach(ob -> {
+            vistaCompra.getComboProducto().addItem(new Producto(ob.getIdProducto(), ob.getUnidad()));
         });
     }
 
     private void cargarComboCliente() {
         vistaCompra.getComboClientes().removeAllItems();
 
-        //List<Persona> lis = servicios.getListaProductos();
-/*
-        lis.stream().forEach(pr -> {
-            //vistaCompra.getComboProducto().addItem(new Pro(pr.getIdProveedor(), pr.getRuc()));
-        });*/
+        List<Persona> lis = servicios.getListaPersonas();
+
+        lis.stream().forEach(ob -> {
+            vistaCompra.getComboClientes().addItem(new Persona(ob.getApellido(), ob.getNombre(), ob.getDni()));
+        });
     }
 
     private void setModelCombox() {
@@ -118,7 +118,7 @@ public class ControladorCompra {
         DefaultComboBoxModel<Producto> modelProducto = new DefaultComboBoxModel<>();
         vistaCompra.getComboProducto().setModel(modelProducto);
         DefaultComboBoxModel<Persona> modelPersona = new DefaultComboBoxModel<>();
-        vistaCompra.getComboProducto().setModel(modelPersona);
+        vistaCompra.getComboClientes().setModel(modelPersona);
     }
 
 }

@@ -71,14 +71,6 @@ public class Compra extends javax.swing.JFrame {
         this.tableProductosLista = tableProductosLista;
     }
 
-    public JComboBox getComboProducto() {
-        return comboClientes;
-    }
-
-    public void setComboProducto(JComboBox ComboProducto) {
-        this.comboClientes = ComboProducto;
-    }
-
     public JComboBox getComboTipoPago() {
         return comboTipoPago;
     }
@@ -93,6 +85,14 @@ public class Compra extends javax.swing.JFrame {
 
     public void setComboClientes(JComboBox comboClientes) {
         this.comboClientes = comboClientes;
+    }
+
+    public JComboBox getComboProducto() {
+        return comboProducto;
+    }
+
+    public void setComboProducto(JComboBox comboProducto) {
+        this.comboProducto = comboProducto;
     }
 
     /**
@@ -147,9 +147,10 @@ public class Compra extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblFechaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

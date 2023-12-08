@@ -5,9 +5,11 @@
 package facturaviewsoap;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import controlador.ControladorCompra;
 import controlador.ControladorPrincipal;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import vista.Compra;
 import vista.Login;
 import ws.PuntoVentaOperaciones;
 import ws.PuntoVentaOperaciones_Service;
@@ -27,9 +29,11 @@ public class FacturaViewSOAP {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            Compra compra = new Compra();
+            ControladorCompra cc = new ControladorCompra(compra);
+            cc.iniciarControl();
             Login login = new Login();
             ControladorPrincipal control = new ControladorPrincipal(login);
-            //cliente.
             control.iniciarControl();
 
         } catch (UnsupportedLookAndFeelException e) {

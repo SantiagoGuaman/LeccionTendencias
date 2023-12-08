@@ -24,6 +24,18 @@
 
 <xs:element name="getListaClasificacionesResponse" type="tns:getListaClasificacionesResponse"/>
 
+<xs:element name="getListaFacturas" type="tns:getListaFacturas"/>
+
+<xs:element name="getListaFacturasResponse" type="tns:getListaFacturasResponse"/>
+
+<xs:element name="getListaItemsFacturas" type="tns:getListaItemsFacturas"/>
+
+<xs:element name="getListaItemsFacturasResponse" type="tns:getListaItemsFacturasResponse"/>
+
+<xs:element name="getListaPersonas" type="tns:getListaPersonas"/>
+
+<xs:element name="getListaPersonasResponse" type="tns:getListaPersonasResponse"/>
+
 <xs:element name="getListaProductos" type="tns:getListaProductos"/>
 
 <xs:element name="getListaProductosResponse" type="tns:getListaProductosResponse"/>
@@ -31,6 +43,14 @@
 <xs:element name="getListaProveedores" type="tns:getListaProveedores"/>
 
 <xs:element name="getListaProveedoresResponse" type="tns:getListaProveedoresResponse"/>
+
+<xs:element name="getListaRoles" type="tns:getListaRoles"/>
+
+<xs:element name="getListaRolesResponse" type="tns:getListaRolesResponse"/>
+
+<xs:element name="getListaTipoPago" type="tns:getListaTipoPago"/>
+
+<xs:element name="getListaTipoPagoResponse" type="tns:getListaTipoPagoResponse"/>
 
 <xs:element name="loadData" type="tns:loadData"/>
 
@@ -81,6 +101,24 @@
 <xs:complexType name="decryptResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListaTipoPago">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaTipoPagoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tipoPago" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tipoPago">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+<xs:element name="id_tipo_pago" type="xs:int"/>
+<xs:element name="tipo" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -163,6 +201,53 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getListaRoles">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaRolesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:rol" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rol">
+<xs:sequence>
+<xs:element name="estado" type="xs:boolean"/>
+<xs:element name="id_rol" type="xs:int"/>
+<xs:element name="nombreRol" type="xs:string" minOccurs="0"/>
+<xs:element name="usuarioRol" type="tns:usuarioRol" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuarioRol">
+<xs:sequence>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="usuario">
+<xs:sequence>
+<xs:element name="id_usuario" type="xs:int"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="user" type="xs:string" minOccurs="0"/>
+<xs:element name="usuarioRol" type="tns:usuarioRol" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="persona">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"/>
+<xs:element name="celular" type="xs:string" minOccurs="0"/>
+<xs:element name="correo" type="xs:string" minOccurs="0"/>
+<xs:element name="dni" type="xs:string" minOccurs="0"/>
+<xs:element name="id_persona" type="xs:int"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="siExisteRol">
 <xs:sequence>
 <xs:element name="rolNombre" type="xs:string" minOccurs="0"/>
@@ -197,6 +282,53 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getListaItemsFacturas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaItemsFacturasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:itemFactura" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemFactura">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int"/>
+<xs:element name="factura" type="tns:factura" minOccurs="0"/>
+<xs:element name="id_item_factura" type="xs:int"/>
+<xs:element name="precio" type="xs:double" minOccurs="0"/>
+<xs:element name="producto" type="tns:producto" minOccurs="0"/>
+<xs:element name="subtotal" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="factura">
+<xs:sequence>
+<xs:element name="descuento" type="xs:double" minOccurs="0"/>
+<xs:element name="fecha" type="tns:localDateTime" minOccurs="0"/>
+<xs:element name="id_factura" type="xs:int"/>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="ruc" type="xs:string" minOccurs="0"/>
+<xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"/>
+<xs:element name="total" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="localDateTime" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaPersonas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaPersonasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:persona" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="buscarNombreCompleto">
 <xs:sequence>
 <xs:element name="dni" type="xs:string" minOccurs="0"/>
@@ -224,52 +356,6 @@
 <xs:element name="factura" type="tns:factura" minOccurs="0"/>
 <xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"/>
 <xs:element name="itemFac" type="tns:itemFactura" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="persona">
-<xs:sequence>
-<xs:element name="apellido" type="xs:string" minOccurs="0"/>
-<xs:element name="celular" type="xs:string" minOccurs="0"/>
-<xs:element name="correo" type="xs:string" minOccurs="0"/>
-<xs:element name="dni" type="xs:string" minOccurs="0"/>
-<xs:element name="id_persona" type="xs:int"/>
-<xs:element name="nombre" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="factura">
-<xs:sequence>
-<xs:element name="descuento" type="xs:double" minOccurs="0"/>
-<xs:element name="fecha" type="tns:localDateTime" minOccurs="0"/>
-<xs:element name="id_factura" type="xs:int"/>
-<xs:element name="persona" type="tns:persona" minOccurs="0"/>
-<xs:element name="ruc" type="xs:string" minOccurs="0"/>
-<xs:element name="tipoPago" type="tns:tipoPago" minOccurs="0"/>
-<xs:element name="total" type="xs:double" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="localDateTime" final="extension restriction">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="tipoPago">
-<xs:sequence>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"/>
-<xs:element name="id_tipo_pago" type="xs:int"/>
-<xs:element name="tipo" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="itemFactura">
-<xs:sequence>
-<xs:element name="cantidad" type="xs:int"/>
-<xs:element name="factura" type="tns:factura" minOccurs="0"/>
-<xs:element name="id_item_factura" type="xs:int"/>
-<xs:element name="precio" type="xs:double" minOccurs="0"/>
-<xs:element name="producto" type="tns:producto" minOccurs="0"/>
-<xs:element name="subtotal" type="xs:double" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -301,38 +387,22 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getListaFacturas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaFacturasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:factura" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="registrarPersona">
 <xs:sequence>
 <xs:element name="persona" type="tns:persona" minOccurs="0"/>
 <xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
 <xs:element name="rol" type="tns:rol" minOccurs="0"/>
 <xs:element name="competencia" type="tns:competencia" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="usuario">
-<xs:sequence>
-<xs:element name="id_usuario" type="xs:int"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="persona" type="tns:persona" minOccurs="0"/>
-<xs:element name="user" type="xs:string" minOccurs="0"/>
-<xs:element name="usuarioRol" type="tns:usuarioRol" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="usuarioRol">
-<xs:sequence>
-<xs:element name="rol" type="tns:rol" minOccurs="0"/>
-<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="rol">
-<xs:sequence>
-<xs:element name="estado" type="xs:boolean"/>
-<xs:element name="id_rol" type="xs:int"/>
-<xs:element name="nombreRol" type="xs:string" minOccurs="0"/>
-<xs:element name="usuarioRol" type="tns:usuarioRol" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

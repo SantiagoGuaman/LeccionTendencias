@@ -22,6 +22,18 @@
 <message name="getListaProductosResponse">
 <part name="parameters" element="tns:getListaProductosResponse"/>
 </message>
+<message name="getListaItemsFacturas">
+<part name="parameters" element="tns:getListaItemsFacturas"/>
+</message>
+<message name="getListaItemsFacturasResponse">
+<part name="parameters" element="tns:getListaItemsFacturasResponse"/>
+</message>
+<message name="getListaRoles">
+<part name="parameters" element="tns:getListaRoles"/>
+</message>
+<message name="getListaRolesResponse">
+<part name="parameters" element="tns:getListaRolesResponse"/>
+</message>
 <message name="registrarPersona">
 <part name="parameters" element="tns:registrarPersona"/>
 </message>
@@ -63,6 +75,24 @@
 </message>
 <message name="loadDataResponse">
 <part name="parameters" element="tns:loadDataResponse"/>
+</message>
+<message name="getListaPersonas">
+<part name="parameters" element="tns:getListaPersonas"/>
+</message>
+<message name="getListaPersonasResponse">
+<part name="parameters" element="tns:getListaPersonasResponse"/>
+</message>
+<message name="getListaTipoPago">
+<part name="parameters" element="tns:getListaTipoPago"/>
+</message>
+<message name="getListaTipoPagoResponse">
+<part name="parameters" element="tns:getListaTipoPagoResponse"/>
+</message>
+<message name="getListaFacturas">
+<part name="parameters" element="tns:getListaFacturas"/>
+</message>
+<message name="getListaFacturasResponse">
+<part name="parameters" element="tns:getListaFacturasResponse"/>
 </message>
 <message name="buscarNombreCompleto">
 <part name="parameters" element="tns:buscarNombreCompleto"/>
@@ -107,6 +137,14 @@
 <input wsam:Action="http://ws/PuntoVentaOperaciones/getListaProductosRequest" message="tns:getListaProductos"/>
 <output wsam:Action="http://ws/PuntoVentaOperaciones/getListaProductosResponse" message="tns:getListaProductosResponse"/>
 </operation>
+<operation name="getListaItemsFacturas">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/getListaItemsFacturasRequest" message="tns:getListaItemsFacturas"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/getListaItemsFacturasResponse" message="tns:getListaItemsFacturasResponse"/>
+</operation>
+<operation name="getListaRoles">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/getListaRolesRequest" message="tns:getListaRoles"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/getListaRolesResponse" message="tns:getListaRolesResponse"/>
+</operation>
 <operation name="registrarPersona">
 <input wsam:Action="http://ws/PuntoVentaOperaciones/registrarPersonaRequest" message="tns:registrarPersona"/>
 <output wsam:Action="http://ws/PuntoVentaOperaciones/registrarPersonaResponse" message="tns:registrarPersonaResponse"/>
@@ -134,6 +172,18 @@
 <operation name="loadData">
 <input wsam:Action="http://ws/PuntoVentaOperaciones/loadDataRequest" message="tns:loadData"/>
 <output wsam:Action="http://ws/PuntoVentaOperaciones/loadDataResponse" message="tns:loadDataResponse"/>
+</operation>
+<operation name="getListaPersonas">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/getListaPersonasRequest" message="tns:getListaPersonas"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/getListaPersonasResponse" message="tns:getListaPersonasResponse"/>
+</operation>
+<operation name="getListaTipoPago">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/getListaTipoPagoRequest" message="tns:getListaTipoPago"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/getListaTipoPagoResponse" message="tns:getListaTipoPagoResponse"/>
+</operation>
+<operation name="getListaFacturas">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/getListaFacturasRequest" message="tns:getListaFacturas"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/getListaFacturasResponse" message="tns:getListaFacturasResponse"/>
 </operation>
 <operation name="buscarNombreCompleto">
 <input wsam:Action="http://ws/PuntoVentaOperaciones/buscarNombreCompletoRequest" message="tns:buscarNombreCompleto"/>
@@ -185,6 +235,24 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="getListaItemsFacturas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getListaRoles">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="registrarPersona">
 <soap:operation soapAction=""/>
 <input>
@@ -240,6 +308,33 @@
 </output>
 </operation>
 <operation name="loadData">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getListaPersonas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getListaTipoPago">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getListaFacturas">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
