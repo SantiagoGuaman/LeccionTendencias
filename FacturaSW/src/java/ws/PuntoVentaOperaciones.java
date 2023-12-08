@@ -9,6 +9,7 @@ import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.swing.JOptionPane;
 import modelo.Clasificacion;
 import modelo.Competencia;
 import modelo.Factura;
@@ -21,7 +22,7 @@ import modelo.RolCompetencia;
 import modelo.TipoPago;
 import modelo.Usuario;
 import modelo.UsuarioRol;
-//import security.AES_ENCRYPTOR;
+import security.AES_ENCRYPTOR;
 
 /**
  *
@@ -30,7 +31,7 @@ import modelo.UsuarioRol;
 @WebService(serviceName = "PuntoVentaOperaciones")
 public class PuntoVentaOperaciones {
 
-    //AES_ENCRYPTOR ac = new AES_ENCRYPTOR();
+    AES_ENCRYPTOR ac = new AES_ENCRYPTOR();
     List<Persona> listaPersonas = new ArrayList<>();
     List<Usuario> listaUsuarios = new ArrayList<>();
     List<Rol> listaRoles = new ArrayList<>();
@@ -52,6 +53,7 @@ public class PuntoVentaOperaciones {
         RolCompetencia rolWithCompetencia = new RolCompetencia(rol, competencia);
         listaUsuariosRol.add(userWithRol);
         listaRolCompetencias.add(rolWithCompetencia);
+        listaUsuarios.add(usuario);
         usuario.setUsuarioRol(listaUsuariosRol);
         competencia.setRolCompetencia(listaRolCompetencias);
 
@@ -97,6 +99,36 @@ public class PuntoVentaOperaciones {
     @WebMethod(operationName = "getListaClasificaciones")
     public List<Clasificacion> getListaClasificaciones() {
         return listaClasificaciones;
+    }
+
+    @WebMethod(operationName = "getListaPersonas")
+    public List<Persona> getListaPersonas() {
+        return listaPersonas;
+    }
+
+    @WebMethod(operationName = "getListaTipoPago")
+    public List<TipoPago> getListaTipoPago() {
+        return listaTipoPagos;
+    }
+
+    @WebMethod(operationName = "getListaProductos")
+    public List<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    @WebMethod(operationName = "getListaRoles")
+    public List<Rol> getListaRoles() {
+        return listaRoles;
+    }
+
+    @WebMethod(operationName = "getListaFacturas")
+    public List<Factura> getListaFacturas() {
+        return listaFacturas;
+    }
+
+    @WebMethod(operationName = "getListaItemsFacturas")
+    public List<ItemFactura> getListaItemsFacturas() {
+        return listaItemFacturas;
     }
 
     @WebMethod(operationName = "buscarPorDNI")
@@ -167,7 +199,6 @@ public class PuntoVentaOperaciones {
                 -> compe.getNombreCompetencia().equals(competenciaNombre));
     }
 
-    /*
     @WebMethod(operationName = "encrypt")
     public String encrypt(@WebParam(name = "data") String data) {
         return ac.encrypt(data);
@@ -177,5 +208,48 @@ public class PuntoVentaOperaciones {
     public String decrypt(@WebParam(name = "encryptData") String encryptData) {
         return ac.decrypt(encryptData);
     }
-     */
+
+    @WebMethod(operationName = "loadData")
+    public void loadData() {
+        Proveedor prov = new Proveedor(1, "123", "none", "EC", "none", "Dólar");
+        Proveedor prov_2 = new Proveedor(2, "123", "none", "EC", "none", "Dólar");
+        Proveedor prov_3 = new Proveedor(3, "123", "none", "EC", "none", "Dólar");
+        listaProveedores.add(prov);
+        listaProveedores.add(prov_2);
+        listaProveedores.add(prov_3);
+
+        Clasificacion class_1 = new Clasificacion(1, "Fruta");
+        Clasificacion class_2 = new Clasificacion(1, "Coche");
+        Clasificacion class_3 = new Clasificacion(1, "Tejidos");
+        listaClasificaciones.add(class_1);
+        listaClasificaciones.add(class_2);
+        listaClasificaciones.add(class_3);
+    }
+
+    public static void main(String[] args) {
+        PuntoVentaOperaciones pv = new PuntoVentaOperaciones();
+
+        Persona person = new Persona(1, "Mike", "Thompson", "0105449649", "No tiene", "abc@gamil.com");
+        Rol rol = new Rol(1, "ADMIN", true);
+        Competencia competencia = new Competencia(1, "2", "2");
+        List<UsuarioRol> userRol = new ArrayList<>();
+
+        Usuario user = new Usuario(1, person, "abc", "123", userRol);
+        UsuarioRol userWithRol = new UsuarioRol(user, rol);
+        user.getUsuarioRol().add(userWithRol);
+
+        System.out.println("Here " + user.getUser() + " - " + user.getPassword());
+        System.out.println("Here " + userWithRol);
+
+        if (pv.registrarPersona(person, user, rol, competencia)) {
+            System.out.println("Register Person");
+            System.out.println(user);
+        }
+
+        if (pv.siExisteUsuario(user.getUser(), "123")) {
+            JOptionPane.showMessageDialog(null, "Bienvenido");
+        } else {
+            System.out.println("Nope");
+        }
+    }
 }
