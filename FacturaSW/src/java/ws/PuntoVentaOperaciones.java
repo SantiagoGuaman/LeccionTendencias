@@ -60,6 +60,26 @@ public class PuntoVentaOperaciones {
         return listaPersonas.add(persona);
     }
 
+    @WebMethod(operationName = "registrarRol")
+    public boolean registrarRol(@WebParam(name = "rol") Rol rol, @WebParam(name = "usuario") Usuario usuario) {
+
+        UsuarioRol userRol = new UsuarioRol(usuario, rol);
+        listaUsuariosRol.add(userRol);
+        rol.setUsuarioRol(userRol);
+        return listaRoles.add(rol);
+    }
+
+    @WebMethod(operationName = "registrarCompetencia")
+    public boolean registrarCompetencia(@WebParam(name = "competencia") Competencia competencia) {
+
+        return listaCompetencias.add(competencia);
+    }
+
+    @WebMethod(operationName = "registrarClasificacion")
+    public boolean registrarClasificacion(@WebParam(name = "clasificacion") Clasificacion clasificacion) {
+        return listaClasificaciones.add(clasificacion);
+    }
+
     @WebMethod(operationName = "registrarProducto")
     public boolean registrarProducto(@WebParam(name = "producto") Producto producto,
             @WebParam(name = "proveedor") Proveedor proveedor, @WebParam(name = "clasificacion") Clasificacion clasificacion) {
@@ -183,7 +203,6 @@ public class PuntoVentaOperaciones {
 
     @WebMethod(operationName = "estadoRol")
     public Boolean estadoRol(@WebParam(name = "rolNombre") String rolNombre) {
-        //boolean state = false;
         for (Rol listaRol : listaRoles) {
             if (listaRol.equals(rolNombre)) {
                 return listaRol.isEstado();
@@ -211,28 +230,57 @@ public class PuntoVentaOperaciones {
 
     @WebMethod(operationName = "loadData")
     public void loadData() {
-        Proveedor prov = new Proveedor(1, "123", "none", "EC", "none", "Dólar");
-        Proveedor prov_2 = new Proveedor(2, "123", "none", "EC", "none", "Dólar");
-        Proveedor prov_3 = new Proveedor(3, "123", "none", "EC", "none", "Dólar");
+        Proveedor prov = new Proveedor(1, "0287432", "none", "EC", "none", "Dólar");
+        Proveedor prov_2 = new Proveedor(2, "0287411", "none", "EC", "none", "Dólar");
+        Proveedor prov_3 = new Proveedor(3, "0393742", "none", "EC", "none", "Dólar");
         listaProveedores.add(prov);
         listaProveedores.add(prov_2);
         listaProveedores.add(prov_3);
 
         Clasificacion class_1 = new Clasificacion(1, "Comida");
-        Clasificacion class_2 = new Clasificacion(1, "Coche");
-        Clasificacion class_3 = new Clasificacion(1, "Tejidos");
+        Clasificacion class_2 = new Clasificacion(2, "Coche");
+        Clasificacion class_3 = new Clasificacion(3, "Tejidos");
         listaClasificaciones.add(class_1);
         listaClasificaciones.add(class_2);
         listaClasificaciones.add(class_3);
-        
+
         TipoPago pago = new TipoPago(1, "Efectivo", "Pago con dinero en caja");
+        TipoPago pagoCredito = new TipoPago(1, "Crédito", "Pago con tarjeta");
+
         listaTipoPagos.add(pago);
-        
-        Producto producto = new Producto(1, 2, 30.00, "Galleta", class_1, prov, true);
-        listaProductos.add(producto);
-        
+        listaTipoPagos.add(pagoCredito);
+
+        Producto producto_1 = new Producto(1, 100, 30.00, "Galleta", class_1, prov, true);
+        Producto producto_2 = new Producto(2, 300, 4.00, "Papa", class_1, prov_2, true);
+
+        listaProductos.add(producto_1);
+        listaProductos.add(producto_2);
+
         Persona cliente = new Persona(1, "Stacy", "Hanz", "0105449649", "None", "Stacy@gmail.com");
         listaPersonas.add(cliente);
+    }
+
+    @WebMethod(operationName = "loadRoles")
+    public void loadRoles() {
+
+        Persona persona = new Persona(5, "Hammer", "Gitz", "0105449611", "0139393222", "example@gmail.com");
+        Persona cliente = new Persona(4, "Karen", "Jatz", "0105442211", "0133422314", "karen@gmail.com");
+        listaPersonas.add(persona);
+        listaPersonas.add(cliente);
+        Usuario usuario = new Usuario(3, persona, "Admin", "Admin", listaUsuariosRol);
+        Usuario usuarioCliente = new Usuario(2, cliente, "none", "none", listaUsuariosRol);
+
+        listaUsuarios.add(usuario);
+        Rol rol_1 = new Rol(1, "ADMINISTRADOR", true);
+        Rol rol_2 = new Rol(1, "CLIENTE", true);
+        Rol rol_3 = new Rol(1, "CAJERO", true);
+
+        UsuarioRol usuarioRol = new UsuarioRol(usuario, rol_1);
+        rol_1.setUsuarioRol(usuarioRol);
+        listaRoles.add(rol_1);
+        listaRoles.add(rol_2);
+        listaRoles.add(rol_3);
+        listaUsuariosRol.add(usuarioRol);
     }
 
     public static void main(String[] args) {

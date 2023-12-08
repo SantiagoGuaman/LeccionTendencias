@@ -76,6 +76,30 @@
 <message name="loadDataResponse">
 <part name="parameters" element="tns:loadDataResponse"/>
 </message>
+<message name="registrarRol">
+<part name="parameters" element="tns:registrarRol"/>
+</message>
+<message name="registrarRolResponse">
+<part name="parameters" element="tns:registrarRolResponse"/>
+</message>
+<message name="loadRoles">
+<part name="parameters" element="tns:loadRoles"/>
+</message>
+<message name="loadRolesResponse">
+<part name="parameters" element="tns:loadRolesResponse"/>
+</message>
+<message name="registrarCompetencia">
+<part name="parameters" element="tns:registrarCompetencia"/>
+</message>
+<message name="registrarCompetenciaResponse">
+<part name="parameters" element="tns:registrarCompetenciaResponse"/>
+</message>
+<message name="registrarClasificacion">
+<part name="parameters" element="tns:registrarClasificacion"/>
+</message>
+<message name="registrarClasificacionResponse">
+<part name="parameters" element="tns:registrarClasificacionResponse"/>
+</message>
 <message name="getListaPersonas">
 <part name="parameters" element="tns:getListaPersonas"/>
 </message>
@@ -172,6 +196,22 @@
 <operation name="loadData">
 <input wsam:Action="http://ws/PuntoVentaOperaciones/loadDataRequest" message="tns:loadData"/>
 <output wsam:Action="http://ws/PuntoVentaOperaciones/loadDataResponse" message="tns:loadDataResponse"/>
+</operation>
+<operation name="registrarRol">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/registrarRolRequest" message="tns:registrarRol"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/registrarRolResponse" message="tns:registrarRolResponse"/>
+</operation>
+<operation name="loadRoles">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/loadRolesRequest" message="tns:loadRoles"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/loadRolesResponse" message="tns:loadRolesResponse"/>
+</operation>
+<operation name="registrarCompetencia">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/registrarCompetenciaRequest" message="tns:registrarCompetencia"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/registrarCompetenciaResponse" message="tns:registrarCompetenciaResponse"/>
+</operation>
+<operation name="registrarClasificacion">
+<input wsam:Action="http://ws/PuntoVentaOperaciones/registrarClasificacionRequest" message="tns:registrarClasificacion"/>
+<output wsam:Action="http://ws/PuntoVentaOperaciones/registrarClasificacionResponse" message="tns:registrarClasificacionResponse"/>
 </operation>
 <operation name="getListaPersonas">
 <input wsam:Action="http://ws/PuntoVentaOperaciones/getListaPersonasRequest" message="tns:getListaPersonas"/>
@@ -308,6 +348,42 @@
 </output>
 </operation>
 <operation name="loadData">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="registrarRol">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="loadRoles">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="registrarCompetencia">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="registrarClasificacion">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

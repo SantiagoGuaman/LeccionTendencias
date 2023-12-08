@@ -6,9 +6,7 @@ package controlador;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -113,8 +111,7 @@ public class ControladorProducto {
         List<Clasificacion> lis = servicios.getListaClasificaciones();
 
         lis.stream().forEach(cl -> {
-            //vista.getComboClasificacion().addItem(cl.getGrupo());
-            vista.getComboClasificacion().addItem(new Clasificacion(cl.getGrupo(), cl.getIdCompetencia()));
+            vista.getComboClasificacion().addItem(new Clasificacion(cl));
 
         });
     }
@@ -125,8 +122,7 @@ public class ControladorProducto {
         List<Proveedor> lis = servicios.getListaProveedores();
 
         lis.stream().forEach(pr -> {
-            //vista.getComboProveedor().addItem(pr.getRuc());
-            vista.getComboProveedor().addItem(new Proveedor(pr.getIdProveedor(), pr.getRuc()));
+            vista.getComboProveedor().addItem(new Proveedor(pr));
         });
     }
 

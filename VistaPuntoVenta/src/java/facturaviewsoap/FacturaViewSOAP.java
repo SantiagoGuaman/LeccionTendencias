@@ -5,11 +5,9 @@
 package facturaviewsoap;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import controlador.ControladorCompra;
 import controlador.ControladorPrincipal;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import vista.Compra;
 import vista.Login;
 import ws.PuntoVentaOperaciones;
 import ws.PuntoVentaOperaciones_Service;

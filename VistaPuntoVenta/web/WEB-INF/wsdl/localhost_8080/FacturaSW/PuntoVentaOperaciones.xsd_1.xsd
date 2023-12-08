@@ -56,6 +56,18 @@
 
 <xs:element name="loadDataResponse" type="tns:loadDataResponse"/>
 
+<xs:element name="loadRoles" type="tns:loadRoles"/>
+
+<xs:element name="loadRolesResponse" type="tns:loadRolesResponse"/>
+
+<xs:element name="registrarClasificacion" type="tns:registrarClasificacion"/>
+
+<xs:element name="registrarClasificacionResponse" type="tns:registrarClasificacionResponse"/>
+
+<xs:element name="registrarCompetencia" type="tns:registrarCompetencia"/>
+
+<xs:element name="registrarCompetenciaResponse" type="tns:registrarCompetenciaResponse"/>
+
 <xs:element name="registrarCompra" type="tns:registrarCompra"/>
 
 <xs:element name="registrarCompraResponse" type="tns:registrarCompraResponse"/>
@@ -67,6 +79,10 @@
 <xs:element name="registrarProducto" type="tns:registrarProducto"/>
 
 <xs:element name="registrarProductoResponse" type="tns:registrarProductoResponse"/>
+
+<xs:element name="registrarRol" type="tns:registrarRol"/>
+
+<xs:element name="registrarRolResponse" type="tns:registrarRolResponse"/>
 
 <xs:element name="siExisteCompetencia" type="tns:siExisteCompetencia"/>
 
@@ -201,6 +217,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="registrarClasificacion">
+<xs:sequence>
+<xs:element name="clasificacion" type="tns:clasificacion" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarClasificacionResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getListaRoles">
 <xs:sequence/>
 </xs:complexType>
@@ -319,6 +347,14 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="loadRoles">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="loadRolesResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getListaPersonas">
 <xs:sequence/>
 </xs:complexType>
@@ -387,21 +423,8 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getListaFacturas">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getListaFacturasResponse">
+<xs:complexType name="registrarCompetencia">
 <xs:sequence>
-<xs:element name="return" type="tns:factura" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="registrarPersona">
-<xs:sequence>
-<xs:element name="persona" type="tns:persona" minOccurs="0"/>
-<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
-<xs:element name="rol" type="tns:rol" minOccurs="0"/>
 <xs:element name="competencia" type="tns:competencia" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
@@ -422,7 +445,45 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="registrarCompetenciaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListaFacturas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getListaFacturasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:factura" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarPersona">
+<xs:sequence>
+<xs:element name="persona" type="tns:persona" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+<xs:element name="competencia" type="tns:competencia" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="registrarPersonaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarRol">
+<xs:sequence>
+<xs:element name="rol" type="tns:rol" minOccurs="0"/>
+<xs:element name="usuario" type="tns:usuario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarRolResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
