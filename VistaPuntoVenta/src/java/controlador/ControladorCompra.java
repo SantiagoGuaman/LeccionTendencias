@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Compra;
@@ -88,33 +89,39 @@ public class ControladorCompra {
         });
     }
      */
-    private void llenarFactura() {
-        List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
-        DefaultTableModel dt;
-        dt = (DefaultTableModel) vistaCompra.getTableFactura().getModel();
-        dt.setRowCount(0);
-        listaItems.get(vistaCompra.getComboProducto().getSelectedIndex());
-
-        listaItems.stream().forEach(item -> {
-            String[] fila = {
-                item.getProducto().getUnidad()
-            };
-            dt.addRow(fila);
-        });
-    }
 
     private void llenarTablaDetalle() {
-        List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
         DefaultTableModel dt = (DefaultTableModel) vistaCompra.getTableProductosLista().getModel();
-        dt.setRowCount(0);
 
         int selectedIndex = vistaCompra.getComboProducto().getSelectedIndex();
-        if (selectedIndex >= 0 && selectedIndex < listaItems.size()) {
-            ItemFactura selectedItem = listaItems.get(selectedIndex);
-            String[] fila = {
-                selectedItem.getProducto().getUnidad()
-            };
-            dt.addRow(fila);
+
+        if (selectedIndex >= 0) {
+            ws.Producto pr = (ws.Producto) vistaCompra.getComboProducto().getSelectedItem();
+            for (int i = 0; i < dt.getRowCount(); i++) {
+                if (dt.getValueAt(i, 0).equals(pr.getUnidad())) {
+                    dt.removeRow(i);
+                    break;
+                }
+            }
+
+            String cantidad = JOptionPane.showInputDialog("Ingrese la cantidad deseada");
+            try {
+                if ((Integer.valueOf(cantidad) > pr.getStock()) || cantidad.isEmpty()) {
+                    JOptionPane.showMessageDialog(vistaCompra, "No hay tal cantidad de stock disponible");
+                } else {
+                    double total = Integer.parseInt(cantidad) * pr.getPrecioUnitario();
+                    String[] fila = {
+                        pr.getUnidad(),
+                        String.valueOf(pr.getPrecioUnitario()),
+                        cantidad,
+                        String.valueOf(total)
+                    };
+                    dt.addRow(fila);
+                }
+            } catch (NumberFormatException | NullPointerException ex) {
+                JOptionPane.showMessageDialog(vistaCompra, "Ingrese únicamente numeros");
+            }
+
         }
     }
 
@@ -122,41 +129,50 @@ public class ControladorCompra {
         vistaCompra.getFrameFactura().setSize(435, 375);
         vistaCompra.setLocationRelativeTo(vistaCompra);
         vistaCompra.getFrameFactura().setVisible(true);
+        
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
+        List<Factura> listaFactura = servicios.getListaFacturas();
+        
+        listaFactura.stream().forEach(fac -> {
+            listaItems.stream().forEach(it -> {
+               if(it.getFactura().getRuc().equals(fac.getRuc())){
+                   modeloLista.addElement(fac.getRuc());
+                   modeloLista.addElement(String.valueOf(fac.getTotal()));
+                   modeloLista.addElement(fac.getPersona().toString());
+                   modeloLista.addElement(it.getProducto().toString());
+               } 
+            });
+        });
+        
+        vistaCompra.getListFactura().setModel(modeloLista);
     }
 
     private void registrarCompra() {
+        DefaultTableModel dt = (DefaultTableModel) vistaCompra.getTableProductosLista().getModel();
         TipoPago tipoPago = (TipoPago) vistaCompra.getComboTipoPago().getSelectedItem();
         Producto producto = (Producto) vistaCompra.getComboProducto().getSelectedItem();
         Persona cliente = (Persona) vistaCompra.getComboClientes().getSelectedItem();
-
+        Double total = 0.0;
+        
         Factura factura = new Factura();
         factura.setPersona(cliente);
         factura.setTipoPago(tipoPago);
         factura.setRuc("0123");
+        
+        for(int i = 0; i < dt.getRowCount(); i++){
+            total += Double.valueOf((String) dt.getValueAt(i, 3));
+            System.out.println(Double.valueOf((String) dt.getValueAt(i, 3)));
+        }
+        factura.setTotal(total);
 
         ItemFactura itemFactura = new ItemFactura();
         itemFactura.setFactura(factura);
         itemFactura.setProducto(producto);
-        /*
-        List<Producto> listaItems = new ArrayList<>();
-        listaItems.add(producto);
-        DefaultTableModel dt;
-        dt = (DefaultTableModel) vistaCompra.getTableProductosLista().getModel();
-        dt.setRowCount(0);
         
-        listaItems.stream().forEach(pro -> {
-            String[] fila = {
-                pro.getUnidad(),
-                String.valueOf(pro.getPrecioUnitario())
-                //pro.get
-            };
-            dt.addRow(fila);
-        });  
-         */
         if (servicios.registrarCompra(cliente, producto, factura, tipoPago, itemFactura)) {
             JOptionPane.showMessageDialog(vistaCompra, "Factura generada ahora");
             mostrarFrameFactura();
-            llenarFactura();
         } else {
             JOptionPane.showMessageDialog(vistaCompra, "Error con la Factura");
         }
@@ -169,7 +185,7 @@ public class ControladorCompra {
         List<TipoPago> lis = servicios.getListaTipoPago();
 
         lis.stream().forEach(ob -> {
-            vistaCompra.getComboTipoPago().addItem(new TipoPago(ob.getTipo()));
+            vistaCompra.getComboTipoPago().addItem(new TipoPago(ob));
         });
     }
 
@@ -179,7 +195,7 @@ public class ControladorCompra {
         List<Producto> lis = servicios.getListaProductos();
 
         lis.stream().forEach(ob -> {
-            vistaCompra.getComboProducto().addItem(new Producto(ob.getIdProducto(), ob.getUnidad()));
+            vistaCompra.getComboProducto().addItem(new Producto(ob));
         });
     }
 
@@ -189,7 +205,7 @@ public class ControladorCompra {
         List<Persona> lis = servicios.getListaPersonas();
 
         lis.stream().forEach(ob -> {
-            vistaCompra.getComboClientes().addItem(new Persona(ob.getApellido(), ob.getNombre(), ob.getDni()));
+            vistaCompra.getComboClientes().addItem(new Persona(ob));
         });
     }
 

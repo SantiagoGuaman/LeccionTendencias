@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTable;
 
 /**
@@ -21,14 +22,6 @@ public class Compra extends javax.swing.JFrame {
      */
     public Compra() {
         initComponents();
-    }
-
-    public JTable getTableFactura() {
-        return tableFactura;
-    }
-
-    public void setTableFactura(JTable tableFactura) {
-        this.tableFactura = tableFactura;
     }
 
     public JButton getBtnCompra() {
@@ -95,6 +88,14 @@ public class Compra extends javax.swing.JFrame {
         this.comboProducto = comboProducto;
     }
 
+    public JList getListFactura() {
+        return listFactura;
+    }
+
+    public void setListFactura(JList listFactura) {
+        this.listFactura = listFactura;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,8 +111,8 @@ public class Compra extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lblFechaCompra = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableFactura = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listFactura = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -137,7 +138,7 @@ public class Compra extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(251, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(79, 79, 79)
                 .addComponent(lblFechaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,41 +150,29 @@ public class Compra extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFechaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)))
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tableFactura.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tableFactura);
+        jScrollPane3.setViewportView(listFactura);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -273,14 +262,14 @@ public class Compra extends javax.swing.JFrame {
 
             },
             new String [] {
-                "PRODUCTO", "PRECIO", "VALOR TOTAL"
+                "PRODUCTO", "PRECIO", "CANTIDAD", "VALOR TOTAL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -296,6 +285,7 @@ public class Compra extends javax.swing.JFrame {
             tableProductosLista.getColumnModel().getColumn(0).setResizable(false);
             tableProductosLista.getColumnModel().getColumn(1).setResizable(false);
             tableProductosLista.getColumnModel().getColumn(2).setResizable(false);
+            tableProductosLista.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabel2.setText("TOTAL:");
@@ -369,10 +359,10 @@ public class Compra extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblFechaCompra;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JTable tableFactura;
+    private javax.swing.JList listFactura;
     private javax.swing.JTable tableProductosLista;
     // End of variables declaration//GEN-END:variables
 }
