@@ -9,8 +9,12 @@ import java.awt.Font;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Compra;
+import ws.Factura;
+import ws.ItemFactura;
+import ws.LocalDateTime;
 import ws.Persona;
 import ws.Producto;
 import ws.PuntoVentaOperaciones_Service;
@@ -40,6 +44,7 @@ public class ControladorCompra {
         cargarComboCliente();
         cargarComboProducto();
         cargarComboTipoPago();
+        vistaCompra.getBtnCompra().addActionListener(l -> registrarCompra());
     }
 
     /*
@@ -72,13 +77,77 @@ public class ControladorCompra {
         });
     }
      */
+    
+    private void llenarFactura() {
+        List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
+        DefaultTableModel dt;
+        dt = (DefaultTableModel) vistaCompra.getTableFactura().getModel();
+        dt.setRowCount(0);
+        
+        listaItems.stream().forEach(item -> {
+            String[] fila = {
+                item.getProducto().getUnidad()
+            };
+            dt.addRow(fila);
+        });
+        
+    }
+    
     private void mostrarFrameFactura() {
         vistaCompra.getFrameFactura().setSize(435, 375);
         vistaCompra.setLocationRelativeTo(vistaCompra);
         vistaCompra.getFrameFactura().setVisible(true);
     }
 
+    /*
+     private void agregarProducto() {
+        String unidad = vista.getTxtUnidad().getText().trim();
+        String stock = vista.getTxtStock().getText();
+        String precio_unitario = vista.getTxtPrecio().getText();
+        Clasificacion clasi = (Clasificacion) vista.getComboClasificacion().getSelectedItem();
+        Proveedor prov = (Proveedor) vista.getComboProveedor().getSelectedItem();
+        boolean iva = vista.getRdIva().isSelected();
+
+        ws.Producto producto = new ws.Producto();
+        producto.setIva(iva);
+        producto.setStock(Integer.valueOf(stock));
+        producto.setPrecioUnitario(Double.valueOf(precio_unitario));
+        producto.setUnidad(unidad);
+
+        if (!unidad.isEmpty() || !stock.isEmpty() || !precio_unitario.isEmpty()) {
+            if (servicios.registrarProducto(producto, prov, clasi)) {
+                JOptionPane.showMessageDialog(null, "Registro Exitoso");
+                cargarLista();
+                vista.getFrameAddPr().dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pueden dejar campos vacios");
+            vista.getFrameAddPr().dispose();
+        }
+    }
+    
+     */
     private void registrarCompra() {
+        TipoPago tipoPago = (TipoPago) vistaCompra.getComboTipoPago().getSelectedItem();
+        Producto producto = (Producto) vistaCompra.getComboProducto().getSelectedItem();
+        Persona cliente = (Persona) vistaCompra.getComboClientes().getSelectedItem();
+
+        Factura factura = new Factura();
+        factura.setPersona(cliente);
+        factura.setTipoPago(tipoPago);
+        factura.setRuc("0123");
+        
+        ItemFactura itemFactura = new ItemFactura();
+        itemFactura.setFactura(factura);
+        itemFactura.setProducto(producto);
+
+        if (servicios.registrarCompra(cliente, producto, factura, tipoPago, itemFactura)) {
+            JOptionPane.showMessageDialog(vistaCompra, "Factura generada ahora");
+            mostrarFrameFactura();
+            llenarFactura();
+        } else {
+            JOptionPane.showMessageDialog(vistaCompra, "Error con la Factura");
+        }
 
     }
 
