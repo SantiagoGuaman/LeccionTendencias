@@ -52,6 +52,7 @@ public class Producto extends javax.swing.JFrame {
         btnAgregarProd = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableProductos = new javax.swing.JTable();
+        btnVolverPro = new javax.swing.JButton();
 
         jLabel2.setText("Agregar Producto");
 
@@ -205,6 +206,8 @@ public class Producto extends javax.swing.JFrame {
             tableProductos.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        btnVolverPro.setText("Volver");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,7 +220,9 @@ public class Producto extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btnAgregarProd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregarProd, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVolverPro, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -227,7 +232,10 @@ public class Producto extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarProd)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAgregarProd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVolverPro))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
@@ -315,10 +323,19 @@ public class Producto extends javax.swing.JFrame {
         this.tableProductos = tableProductos;
     }
 
+    public JButton getBtnVolverPro() {
+        return btnVolverPro;
+    }
+
+    public void setBtnVolverPro(JButton btnVolverPro) {
+        this.btnVolverPro = btnVolverPro;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarProd;
+    private javax.swing.JButton btnVolverPro;
     private javax.swing.JComboBox comboClasificacion;
     private javax.swing.JComboBox comboProveedor;
     private javax.swing.JFrame frameAddPr;

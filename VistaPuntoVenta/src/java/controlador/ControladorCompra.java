@@ -6,12 +6,15 @@ package controlador;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import vista.Compra;
+import vista.PanelControl;
 import ws.Factura;
 import ws.ItemFactura;
 import ws.Persona;
@@ -29,6 +32,7 @@ public class ControladorCompra {
     private final Compra vistaCompra;
     private final PuntoVentaOperaciones_Service servicio;
     private final PuntoVentaOperaciones servicios;
+    private static final int[] RUC_DIGITOS = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     public ControladorCompra(Compra vistaCompra) {
         this.vistaCompra = vistaCompra;
@@ -52,6 +56,7 @@ public class ControladorCompra {
                 }
             }
         });
+        vistaCompra.getBtnVolverCompra().addActionListener(l -> irPanel());
     }
 
     private void llenarTablaDetalle() {
@@ -90,26 +95,52 @@ public class ControladorCompra {
     }
 
     private void mostrarFrameFactura() {
-        vistaCompra.getFrameFactura().setSize(435, 375);
+        vistaCompra.getFrameFactura().setSize(650, 580);
         vistaCompra.setLocationRelativeTo(vistaCompra);
         vistaCompra.getFrameFactura().setVisible(true);
         
+        vistaCompra.getLblFechaCompra().setText(String.valueOf(new Date()));
         DefaultListModel<String> modeloLista = new DefaultListModel<>();
         List<ItemFactura> listaItems = servicios.getListaItemsFacturas();
         List<Factura> listaFactura = servicios.getListaFacturas();
-        
+        Persona cliente = (Persona) vistaCompra.getComboClientes().getSelectedItem();
         listaFactura.stream().forEach(fac -> {
             listaItems.stream().forEach(it -> {
-               if(it.getFactura().getRuc().equals(fac.getRuc())){
-                   modeloLista.addElement(fac.getRuc());
-                   modeloLista.addElement(String.valueOf(fac.getTotal()));
-                   modeloLista.addElement(fac.getPersona().toString());
-                   modeloLista.addElement(it.getProducto().toString());
-               } 
+                if (it.getFactura().getRuc().equals(fac.getRuc()) && fac.getPersona().getDni().equals(cliente.getDni())) {
+                    modeloLista.addElement(fac.getRuc());
+                    modeloLista.addElement(String.valueOf(fac.getTotal()));
+                    modeloLista.addElement(fac.getPersona().toString());
+                    modeloLista.addElement(it.getProducto().toString());
+                }
             });
         });
-        
+
         vistaCompra.getListFactura().setModel(modeloLista);
+    }
+
+    private static String generateRuc() {
+        // Generamos los primeros 9 dígitos del RUC
+        String ruc = "";
+        for (int i = 0; i < 9; i++) {
+            ruc += RUC_DIGITOS[(int) (Math.random() * RUC_DIGITOS.length)];
+        }
+
+        // Calculamos el dígito verificador
+        int digitoVerificador = 0;
+        for (int i = 0; i < 9; i++) {
+            digitoVerificador += (i + 1) * ruc.charAt(i) - '0';
+        }
+        digitoVerificador = digitoVerificador % 11;
+        if (digitoVerificador == 0) {
+            digitoVerificador = 1;
+        } else if (digitoVerificador == 10) {
+            digitoVerificador = 0;
+        }
+
+        // Agregamos el dígito verificador
+        ruc += Integer.toString(digitoVerificador);
+
+        return ruc;
     }
 
     private void registrarCompra() {
@@ -118,13 +149,13 @@ public class ControladorCompra {
         Producto producto = (Producto) vistaCompra.getComboProducto().getSelectedItem();
         Persona cliente = (Persona) vistaCompra.getComboClientes().getSelectedItem();
         Double total = 0.0;
-        
+
         Factura factura = new Factura();
         factura.setPersona(cliente);
         factura.setTipoPago(tipoPago);
-        factura.setRuc("0123");
-        
-        for(int i = 0; i < dt.getRowCount(); i++){
+        factura.setRuc(generateRuc());
+
+        for (int i = 0; i < dt.getRowCount(); i++) {
             total += Double.valueOf((String) dt.getValueAt(i, 3));
             System.out.println(Double.valueOf((String) dt.getValueAt(i, 3)));
         }
@@ -133,7 +164,7 @@ public class ControladorCompra {
         ItemFactura itemFactura = new ItemFactura();
         itemFactura.setFactura(factura);
         itemFactura.setProducto(producto);
-        
+
         if (servicios.registrarCompra(cliente, producto, factura, tipoPago, itemFactura)) {
             JOptionPane.showMessageDialog(vistaCompra, "Factura generada ahora");
             mostrarFrameFactura();
@@ -181,5 +212,10 @@ public class ControladorCompra {
         DefaultComboBoxModel<Persona> modelPersona = new DefaultComboBoxModel<>();
         vistaCompra.getComboClientes().setModel(modelPersona);
     }
-
+    private void irPanel() {
+        PanelControl vistaPanel = new PanelControl();
+        ControladorPanel control = new ControladorPanel(vistaPanel);
+        control.iniciarControl();
+        this.vistaCompra.dispose();
+    }
 }

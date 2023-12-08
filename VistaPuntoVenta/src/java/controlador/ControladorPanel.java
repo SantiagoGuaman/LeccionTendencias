@@ -53,14 +53,10 @@ public class ControladorPanel {
     }
 
     private void refresh() {
-        if (NO_REFRESH == 0) {
-            servicios.loadData();
-            servicios.loadRoles();
-            NO_REFRESH++;
-        } else {
-            vista.getBtnRefrescar().setVisible(false);
-            vista.getBtnRefrescar().setEnabled(false);
-        }
+        servicios.loadData();
+        servicios.loadRoles();
+        vista.getBtnRefrescar().setVisible(false);
+        vista.getBtnRefrescar().setEnabled(false);
     }
 
     private void cerrarSesion() {

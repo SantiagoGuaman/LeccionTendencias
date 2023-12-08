@@ -13,6 +13,7 @@ import ws.Rol;
 import ws.Usuario;
 import ws.PuntoVentaOperaciones_Service;
 import ws.PuntoVentaOperaciones;
+
 /**
  *
  * @author Usuario
@@ -51,17 +52,18 @@ public class ControladorRegistro {
         per.setDni(cedula);
         per.setCelular(celular);
         per.setCorreo(correo);
-        
+
         Usuario usuario = new Usuario();
         usuario.setUser(username);
         usuario.setPassword(servicios.encrypt(clave));
 
         if (servicios.registrarPersona(per, usuario, new Rol(), new Competencia())) {
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
+            JOptionPane.showMessageDialog(null, "Registro exitoso - Inicie Sesión por Favor");
             /*Producto pr = new Producto();
             ControladorProducto control = new ControladorProducto(pr);
             control.iniciarControl();*/
             this.vista.dispose();
+            irInicio();
         } else {
             String error = "No se ha podido crear el usuario";
             vista.getLblError().setText(error);

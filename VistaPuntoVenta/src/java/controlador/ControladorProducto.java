@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vista.PanelControl;
 import vista.Producto;
 import ws.Clasificacion;
 import ws.Proveedor;
@@ -22,11 +23,11 @@ import ws.PuntoVentaOperaciones_Service;
  * @author Usuario
  */
 public class ControladorProducto {
-
+    
     private final Producto vista;
     private final PuntoVentaOperaciones_Service servicio;
     private final PuntoVentaOperaciones servicios;
-
+    
     public ControladorProducto(Producto vista) {
         servicio = new PuntoVentaOperaciones_Service();
         servicios = servicio.getPuntoVentaOperacionesPort();
@@ -34,19 +35,20 @@ public class ControladorProducto {
         vista.setVisible(true);
         vista.setLocationRelativeTo(null);
     }
-
+    
     public void iniciarControl() {
         cargarLista();
         setModelCombox();
         vista.getBtnAgregarProd().addActionListener(l -> mostrarFrameProducto());
         vista.getBtnAgregar().addActionListener(l -> agregarProducto());
+        vista.getBtnVolverPro().addActionListener(l -> irPanel());
         cargarComboClasificacion();
         cargarComboProveedor();
     }
-
+    
     private void cargarLista() {
         List<ws.Producto> listaPr = servicios.getListaProductos();
-
+        
         for (ws.Producto producto : listaPr) {
             System.out.println(producto.getUnidad());
         }
@@ -72,13 +74,13 @@ public class ControladorProducto {
             dt.addRow(fila);
         });
     }
-
+    
     private void mostrarFrameProducto() {
         vista.getFrameAddPr().setSize(435, 375);
         vista.setLocationRelativeTo(vista);
         vista.getFrameAddPr().setVisible(true);
     }
-
+    
     private void agregarProducto() {
         String unidad = vista.getTxtUnidad().getText().trim();
         String stock = vista.getTxtStock().getText();
@@ -86,13 +88,13 @@ public class ControladorProducto {
         Clasificacion clasi = (Clasificacion) vista.getComboClasificacion().getSelectedItem();
         Proveedor prov = (Proveedor) vista.getComboProveedor().getSelectedItem();
         boolean iva = vista.getRdIva().isSelected();
-
+        
         ws.Producto producto = new ws.Producto();
         producto.setIva(iva);
         producto.setStock(Integer.valueOf(stock));
         producto.setPrecioUnitario(Double.valueOf(precio_unitario));
         producto.setUnidad(unidad);
-
+        
         if (!unidad.isEmpty() || !stock.isEmpty() || !precio_unitario.isEmpty()) {
             if (servicios.registrarProducto(producto, prov, clasi)) {
                 JOptionPane.showMessageDialog(null, "Registro Exitoso");
@@ -104,32 +106,39 @@ public class ControladorProducto {
             vista.getFrameAddPr().dispose();
         }
     }
-
+    
     private void cargarComboClasificacion() {
         vista.getComboClasificacion().removeAllItems();
-
+        
         List<Clasificacion> lis = servicios.getListaClasificaciones();
-
+        
         lis.stream().forEach(cl -> {
             vista.getComboClasificacion().addItem(new Clasificacion(cl));
-
+            
         });
     }
-
+    
     private void cargarComboProveedor() {
         vista.getComboProveedor().removeAllItems();
-
+        
         List<Proveedor> lis = servicios.getListaProveedores();
-
+        
         lis.stream().forEach(pr -> {
             vista.getComboProveedor().addItem(new Proveedor(pr));
         });
     }
-
+    
     private void setModelCombox() {
         DefaultComboBoxModel<Clasificacion> modeltipodoc = new DefaultComboBoxModel<>();
         vista.getComboClasificacion().setModel(modeltipodoc);
         DefaultComboBoxModel<Proveedor> modeltipocli = new DefaultComboBoxModel<>();
         vista.getComboProveedor().setModel(modeltipocli);
+    }
+    
+    private void irPanel() {
+        PanelControl vistaPanel = new PanelControl();
+        ControladorPanel control = new ControladorPanel(vistaPanel);
+        control.iniciarControl();
+        this.vista.dispose();
     }
 }
